@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <title>Планировщик задач</title>
+  </head>
+  <body class="container">
+    <header>
+      <!-- Блок с выводом даты -->
+      <div class="today">
+        <span>Сегодня</span>
+        <div>
+          <p id="weekday"></p>
+          <p id="date"></p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="task-manager">
+        <h1>Планировщик задач</h1>
+        <p class="counter">Задачи: <span id="total-count">0</span></p>
+        <div class="task-input">
+          <input type="text" id="input" placeholder="Введите новую задачу..." />
+          <button id="addButton">+</button>
+        </div>
+        <ul id="task-list" class="list"></ul>
+        <p class="counter">Выполнено: <span id="done-count">0</span></p>
+        <ul id="done-list" class="complete"></ul>
+      </div>
+    </main>
+
+    <script src="./date.js"></script>
+    <script src="./index.js"></script>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <p>Вы уверены?</p>
+        <div class="modal-actions">
+          <button id="confirm">Да</button>
+          <button id="cancel">Нет</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

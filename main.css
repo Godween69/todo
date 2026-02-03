@@ -1,0 +1,255 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  color: #333;
+  padding: 20px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  border: #33333363 1px solid;
+  border-radius: 20px;
+  background-color: #fff;
+  height: 800px;
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+/* ===== HEADER / DATE ===== */
+.today {
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(./img/header.png);
+  background-size: cover;
+  height: 100px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.today span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.today p {
+  text-align: right;
+  font-size: 12px;
+}
+
+#weekday {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ===== TASK MANAGER ===== */
+.task-manager h1 {
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: rgb(107, 107, 107);
+}
+
+/* ===== INPUT ===== */
+.task-input {
+  display: flex;
+  margin: 20px;
+  gap: 5px;
+}
+
+.task-input input {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  padding: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+#input::placeholder {
+  font-size: 15px;
+  color: rgb(150, 150, 150);
+}
+
+#addButton {
+  width: 40px;
+  border: none;
+  background-color: #6b8aa7;
+  color: white;
+  font-size: 24px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+/* ===== TASK LIST ===== */
+.list {
+  max-height: 290px;
+  overflow-y: auto;
+  overflow-x: hidden;   /* ⬅️ запрет горизонтального */
+  margin: 0 20px;
+  padding-right: 5px;
+}
+
+/* ===== TASK ITEM ===== */
+.list li {
+  border: #33333336 1px dashed;
+  border-radius: 9px;
+  list-style: none;
+  padding: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== TASK TEXT ===== */
+.task-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+}
+
+/* раскрытое состояние */
+.list li.expanded .task-text {
+  white-space: pre-wrap;
+  overflow: visible;
+}
+
+/* ===== DELETE BUTTON ===== */
+.delete-button {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.delete-button svg {
+  stroke: rgb(151, 149, 149);
+  stroke-width: 3;
+}
+
+.delete-button:hover svg {
+  stroke: red;
+}
+
+/* ===== DONE BUTTON ===== */
+.done-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: gray;
+}
+
+.done-button:hover {
+  color: green;
+}
+
+/* ===== ПОКАЗ КНОПОК ===== */
+.list li.expanded .delete-button,
+.list li.expanded .done-button {
+  display: inline-flex;
+}
+
+/* ===== COMPLETED LIST ===== */
+.complete {
+  max-height: 130px;
+  overflow-y: auto;
+  overflow-x: hidden;   /* ⬅️ ВАЖНО */
+  padding-right: 5px;
+  border-top: #33333336 1px dashed;
+  padding-top: 10px;
+  margin: 20px;
+}
+
+.complete li {
+  opacity: 0.6;
+  text-decoration: line-through;
+  cursor: default;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 🔑 КЛЮЧЕВОЙ ФИКС ДЛЯ ВЫПОЛНЕННЫХ */
+.complete .task-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+.counter {
+  margin: 10px 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.counter span {
+  font-weight: bold;
+  color: #333;
+}
+/* =========================
+   MOBILE VERSION
+   ========================= */
+@media (max-width: 600px) {
+
+  body {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .container {
+    border: none;          /* ❌ убираем рамку */
+    border-radius: 0;      /* ❌ убираем скругления */
+    margin: 0;             /* ❌ убираем отступы */
+    max-width: 100%;       /* ✅ во всю ширину */
+    height: 100vh;         /* ✅ на весь экран */
+  }
+
+  .today {
+    border-radius: 0;      /* шапка тоже без скруглений */
+  }
+
+  .task-input,
+  .list,
+  .complete,
+  .counter {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
